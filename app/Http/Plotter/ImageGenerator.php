@@ -109,6 +109,8 @@ class ImageGenerator
     
     public function save( $userId )
     {
+        $userId = \Crypt::encryptString($userId);
+        
         if ( \Storage::exists( 'public/' . $userId) === false )
             \Storage::makeDirectory( 'public/' . $userId);
     

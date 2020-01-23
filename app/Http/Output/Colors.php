@@ -8,10 +8,10 @@ class Colors   {
     
     /**
      * Colors constructor.
+     * Set up shell colors
      */
-    public function __construct() {
-
-        // Set up shell colors
+    public function __construct()
+    {
         $this->foreground_colors['black'] = '0;30';
         $this->foreground_colors['dark_gray'] = '1;30';
         $this->foreground_colors['blue'] = '0;34';
@@ -40,13 +40,13 @@ class Colors   {
     }
     
     /**
-     * @param $string
-     * @param null $foreground_color
-     * @param null $background_color
+     * @param string $string
+     * @param string $foreground_color
+     * @param string $background_color
      * Output colored string
-     * @return string
+     * @return string $colored_string formatted stdout
      */
-    public function getColoredString($string, $foreground_color = null, $background_color = null) {
+    public function getColoredString( string $string, string $foreground_color = null, string $background_color = null): string {
         
         $colored_string = "";
         
