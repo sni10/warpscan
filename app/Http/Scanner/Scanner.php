@@ -97,7 +97,7 @@ class Scanner extends AbstractScanner
     {
         $this->checkUrl();
         
-        echo $this->out->getColoredString( "Try save user {$this->userName} :" . self::END_LINE , 'green' );
+        $this->out->getColoredString( "Try save user {$this->userName} :" . self::END_LINE , 'green' );
         
         $users = [];
         $users = \DB::table('writers')

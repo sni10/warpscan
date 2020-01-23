@@ -8,10 +8,9 @@ class Plotter extends AbstractPlotter
     private $maxDate;
     private $dayCount;
     
-    public function plotUser()
+    public function plotUser(): void
     {
         $data = $this->comment->getTimeStamps($this->userId);
-    
         $this->minDate =  new \DateTimeImmutable($data->minDate);
         $this->maxDate = new \DateTimeImmutable($data->maxDate);
         $this->dayCount = $data->dayCount;
