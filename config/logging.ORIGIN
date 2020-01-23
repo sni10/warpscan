@@ -37,7 +37,8 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => array_merge(['single'], php_sapi_name() === 'cli' ? ['stdout'] : []),
+            'channels' => ['daily'],
+            'ignore_exceptions' => false,
         ],
 
         'single' => [
@@ -79,13 +80,7 @@ return [
                 'stream' => 'php://stderr',
             ],
         ],
-        'stdout' => [
-            'driver' => 'monolog',
-            'handler' => StreamHandler::class,
-            'with' => [
-                'stream' => 'php://stdout',
-            ],
-        ],
+
         'syslog' => [
             'driver' => 'syslog',
             'level' => 'debug',

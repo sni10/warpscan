@@ -1,11 +1,16 @@
 <?php
 namespace App\Http\Output;
 
-class Colors {
+class Colors   {
+    
     private $foreground_colors = [];
     private $background_colors = [];
     
+    /**
+     * Colors constructor.
+     */
     public function __construct() {
+
         // Set up shell colors
         $this->foreground_colors['black'] = '0;30';
         $this->foreground_colors['dark_gray'] = '1;30';
@@ -34,8 +39,15 @@ class Colors {
         $this->background_colors['light_gray'] = '47';
     }
     
-    // Returns colored string
+    /**
+     * @param $string
+     * @param null $foreground_color
+     * @param null $background_color
+     * Output colored string
+     * @return string
+     */
     public function getColoredString($string, $foreground_color = null, $background_color = null) {
+        
         $colored_string = "";
         
         // Check if given foreground color found
@@ -49,18 +61,23 @@ class Colors {
         
         // Add string and end coloring
         $colored_string .=  $string . "\033[0m";
-    
-        echo $colored_string;
-//        return $colored_string;
+
+        return $colored_string;
     }
-    
-    // Returns all foreground color names
-    public function getForegroundColors() {
+
+    /**
+     * @return array
+     * Returns all foreground color names
+     */
+    public function getForegroundColors(): array {
         return array_keys($this->foreground_colors);
     }
-    
-    // Returns all background color names
-    public function getBackgroundColors() {
+
+    /**
+     * @return array
+     * Returns all background color names
+     */
+    public function getBackgroundColors(): array {
         return array_keys($this->background_colors);
     }
 }

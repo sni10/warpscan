@@ -3,9 +3,12 @@ namespace App\Http\Plotter;
 
 use App\Domain\Comment\GetComment;
 use App\Http\Output\Colors;
+use App\Http\Output\OutputTrait;
 
 abstract class AbstractPlotter implements AbstractPlotterInterface
 {
+    use OutputTrait;
+    
     const END_LINE = "\n";
     
     /**
@@ -38,7 +41,6 @@ abstract class AbstractPlotter implements AbstractPlotterInterface
         $this->comment = $comment;
         $this->out = $colors;
     }
-    
     
     /**
      * @param int $userId

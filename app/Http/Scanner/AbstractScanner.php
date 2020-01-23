@@ -4,6 +4,7 @@ namespace App\Http\Scanner;
 use App\Domain\Comment\WriteComment;
 use App\Http\Output\Colors;
 use App\Http\Output\OutputError;
+use App\Http\Output\OutputTrait;
 use App\Http\Requester\Request;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -11,6 +12,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 abstract class AbstractScanner implements AbstractScannerInterface
 {
+    
+    use OutputTrait;
     
     const END_LINE = "\n";
     
@@ -42,7 +45,7 @@ abstract class AbstractScanner implements AbstractScannerInterface
      * @var OutputError
      */
     protected $out;
-    
+
     
     /**
      * Scanner constructor.
@@ -55,17 +58,16 @@ abstract class AbstractScanner implements AbstractScannerInterface
         $this->requester = $requester;
         $this->comment = $comment;
         $this->out = $colors;
-;
     }
     
     public function scanUser()
     {
-        echo $this->out->getColoredString( "Save User start..." . self::END_LINE , 'green' );
+        $this->out( "Save User start..." . self::END_LINE , 'green' );
         $this->saveUser();
-        echo $this->out->getColoredString( "Save User finish." . self::END_LINE , 'green' );
-        echo $this->out->getColoredString( "Parse Comments By User start..." . self::END_LINE , 'green' );
+        $this->out( "Save User finish." . self::END_LINE , 'green' );
+        $this->out( "Parse Comments By User start..." . self::END_LINE , 'green' );
         $this->parseCommentsByUser();
-        echo $this->out->getColoredString( "Parse Comments By User finish." . self::END_LINE , 'green' );
+        $this->out( "Parse Comments By User finish." . self::END_LINE , 'green' );
     }
     
     /**

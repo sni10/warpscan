@@ -2,10 +2,13 @@
 namespace App\Http\Requester;
 
 use App\Http\Output\Colors;
+use App\Http\Output\OutputTrait;
 use GuzzleHttp\Client;
 
 class Request
 {
+    use OutputTrait;
+    
     const END_LINE = "\n";
     
     private $client;
@@ -40,8 +43,8 @@ class Request
             $code = $e->getCode();
             $code;
     
-            echo $this->out->getColoredString(  "404 {$userName} not exist, check your userName" . self::END_LINE , 'red' );
-            echo $this->out->getColoredString( "Exiting program..." . self::END_LINE , 'red' );
+            $this->out(  "404 {$userName} not exist, check your userName" . self::END_LINE , 'red' );
+            $this->out( "Exiting program..." . self::END_LINE , 'red' );
             exit;
         }
         

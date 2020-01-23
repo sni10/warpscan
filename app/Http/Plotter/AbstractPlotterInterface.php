@@ -2,13 +2,18 @@
 namespace App\Http\Plotter;
 
 
+use App\Http\Output\OutputTrait;
+
 interface AbstractPlotterInterface
 {
     /**
-     * @return mixed
+     * @return void
      */
-    public function plotUser();
+    public function plotUser(): void;
     
+    /**
+     * @param int $userId
+     */
     public function setUserId(int $userId): void;
 
 }

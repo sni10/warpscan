@@ -3,9 +3,12 @@ namespace App\Http\Plotter;
 
 use App\Domain\Comment\GetComment;
 use App\Http\Output\Colors;
+use App\Http\Output\OutputTrait;
 
 class ImageGenerator
 {
+    use OutputTrait;
+    
     const HOURS = 24;
     const MINUTES_PER_HOUR = 60;
     const MINUTES_PER_DAY = 60 * 24;
@@ -47,11 +50,15 @@ class ImageGenerator
     /**
      * @var Colors
      */
-    private $out;
+    protected $out;
     /**
      * @var GetComment
      */
     private $comment;
+    /**
+     * @var string
+     */
+    private $publicPath;
     
     /**
      * ImageGenerator constructor.
@@ -63,6 +70,8 @@ class ImageGenerator
      */
     public function __construct(int $days, \DateTimeInterface $dateFrom, \DateTimeInterface $dateTo , Colors $colors, GetComment $comment)
     {
+        
+        $this->publicPath = storage_path('app/public') . DIRECTORY_SEPARATOR;
         $this->comment = $comment;
         $this->out = $colors;
         $this->days = $days;
@@ -100,7 +109,16 @@ class ImageGenerator
     
     public function save( $userId )
     {
-        imagepng($this->image, "lwgraph-{$userId}.png", -1);
+        if ( \Storage::exists( 'public/' . $userId) === false )
+            \Storage::makeDirectory( 'public/' . $userId);
+    
+        $fileName = "output.png";
+        $filePath = "public/{$userId}";
+        $fullFilePath = "{$filePath}/{$fileName}";
+        
+        $this->out( \Storage::url($fullFilePath), 'yellow' );
+        
+        imagepng($this->image, "{$this->publicPath}/{$userId}/{$fileName}", -1); // public/storage/{$userId}/
         $this->cleanUp();
     }
     
@@ -118,12 +136,12 @@ class ImageGenerator
             $to = $to->format('Y-m-d');
     
             $result = $this->comment->getChunk($userId,$from,$to);
-            echo $this->out->getColoredString(  "Find ".( count($result) )." items:" . self::END_LINE , 'green' );
+            $this->out(  "Find ".( count($result) )." items:" . self::END_LINE , 'green' );
             
             if (!empty($result)) {
                 
                 // Dataset for a day
-                echo $this->out->getColoredString(  self::END_LINE . "Day $day of $this->days :" , 'green' );
+                $this->out(  self::END_LINE . "Day $day of $this->days :" , 'green' );
                 
                 if (count($result) > 0) foreach ($result as $comment) {
                     // Set pixel
@@ -141,10 +159,10 @@ class ImageGenerator
                     
                     imagesetpixel($this->image, $minute, $this->days - $day, $selectColor);
                     imageellipse($this->image, $minute, $this->days - $day, 3, 3, $selectColor);
-                    echo $this->out->getColoredString(  "#" , 'green' );
+                    $this->out(  "#" , 'green' );
                 }
                 echo self::END_LINE ;
-            } else echo $this->out->getColoredString(  "." , 'green' );
+            } else $this->out(  "." , 'green' );
         }
         
     }

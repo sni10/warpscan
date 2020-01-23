@@ -36,23 +36,23 @@ class Scanner extends AbstractScanner
             $this->getPage();
             // Load page
     
-            echo $this->out->getColoredString(  "Retrieving comments page {$this->currentPage} of ", 'green' );
-            echo $this->out->getColoredString(  $this->pageCount ." : ", 'green' );
+            $this->out(  "Retrieving comments page {$this->currentPage} of ", 'green' );
+            $this->out(  $this->pageCount ." : ", 'green' );
             
             $this->parseComments();
             
             $rand = rand(1,3);
             
-            echo $this->out->getColoredString(  "Waiting {$rand} seconds before next request " , 'red' );
+            $this->out(  "Waiting {$rand} seconds before next request " , 'red' );
             
             $do = 1;
             do {
                 $do++;
                 sleep(1);
-                echo $this->out->getColoredString(   "=" , 'red' );
+                $this->out(   "=" , 'red' );
             } while ( $do <= $rand );
             
-            echo $this->out->getColoredString(  ">". self::END_LINE, 'red' );
+            $this->out(  ">". self::END_LINE, 'red' );
             
         } while ( $this->currentPage <= $this->pageCount );
         
@@ -67,7 +67,7 @@ class Scanner extends AbstractScanner
         {
             
             if ( isset($commentObj->is_hidden) ) {
-                echo $this->out->getColoredString( "H", 'red' );
+                $this->out( "H", 'red' );
                 continue;
             };
             
@@ -84,20 +84,20 @@ class Scanner extends AbstractScanner
                 'userId' => (int)$this->userId,
             ];
     
-            echo $this->out->getColoredString( "." , 'green' );
+            $this->out( "." , 'green' );
             
         }
     
         $this->comment->handle($insert);
     
-        echo $this->out->getColoredString( "+" . self::END_LINE  );
+        $this->out( "+" . self::END_LINE  );
     }
     
     protected function saveUser(): void
     {
         $this->checkUrl();
         
-        $this->out->getColoredString( "Try save user {$this->userName} :" . self::END_LINE , 'green' );
+        $this->out( "Try save user {$this->userName} :" . self::END_LINE , 'green' );
         
         $users = [];
         $users = \DB::table('writers')
@@ -107,17 +107,17 @@ class Scanner extends AbstractScanner
     
         if ( count($users) > 0 )
         {
-            echo $this->out->getColoredString( "Username {$this->userName} all ready exist, ID {$users[0]->id}." . self::END_LINE , 'red' );
+            $this->out( "Username {$this->userName} all ready exist, ID {$users[0]->id}." . self::END_LINE , 'red' );
             $this->userId = $users[0]->id;
             $this->userName = $users[0]->name;
-            echo $this->out->getColoredString( "Exiting program..." . self::END_LINE , 'red' );
+            $this->out( "Exiting program..." . self::END_LINE , 'red' );
             exit;
         }
         
         $this->userId = \DB::table('writers')->insertGetId(
             ['name' => $this->userName]
         );
-        echo $this->out->getColoredString( "User {$this->userName} saved successfully, ID {$this->userId}." . self::END_LINE , 'green' );
+        $this->out( "User {$this->userName} saved successfully, ID {$this->userId}." . self::END_LINE , 'green' );
     }
     
     protected function updateUser(): void
@@ -142,7 +142,7 @@ class Scanner extends AbstractScanner
     public function setUserName(string $userName): void
     {
         $this->userName = $userName;
-        echo $this->out->getColoredString( "Setted {$this->userName} successfully:" . self::END_LINE , 'green' );
+        $this->out( "Setted {$this->userName} successfully:" . self::END_LINE , 'green' );
     }
 
 }

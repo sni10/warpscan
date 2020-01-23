@@ -8,8 +8,12 @@ class Plotter extends AbstractPlotter
     private $maxDate;
     private $dayCount;
     
+    /**
+     * @throws \Exception
+     */
     public function plotUser(): void
     {
+        
         $data = $this->comment->getTimeStamps($this->userId);
         $this->minDate =  new \DateTimeImmutable($data->minDate);
         $this->maxDate = new \DateTimeImmutable($data->maxDate);
@@ -18,11 +22,10 @@ class Plotter extends AbstractPlotter
         $dateFrom = $this->minDate->format('Y-m-d');
         $dateTo = $this->maxDate->format('Y-m-d');
         
-        echo $this->out->getColoredString(  "Activity span from {$dateFrom} to {$dateTo} totaling {$this->dayCount} days" . self::END_LINE, 'green' );
+        $this->out("Activity span from {$dateFrom} to {$dateTo} totaling {$this->dayCount} days", 'green');
         
         $image = new ImageGenerator( $this->dayCount, $this->minDate, $this->maxDate, $this->out, $this->comment );
         $image->fillData($this->userId);
         $image->save($this->userId);
     }
-    
 }
