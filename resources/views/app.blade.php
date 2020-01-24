@@ -15,8 +15,7 @@
     </head>
 <body>
 
-<div id="run" ></div>
-
+<div id="init" ></div>
 <script src="{{ asset('js/app.js')  }}" ></script>
 </body>
 </html>

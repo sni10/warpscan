@@ -1,20 +1,4 @@
 const mix = require('laravel-mix');
-/**
- * CLone settings for webStorm configuration from vue.config.js
- * File | Settings | Languages & Frameworks | JavaScript | Webpack -> set this file
- * for seen webpack import path aliases highlight '@/path' or '~/path'
- * */
-const path = require('path');
-
-mix.webpackConfig({
-    resolve: {
-        extensions: [ '.js', '.vue' ],
-        alias: {
-            "~": path.resolve(__dirname, 'resources/'),
-            "@": path.resolve(__dirname, 'resources/')
-        }
-    }
-})
 
 /*
  |--------------------------------------------------------------------------

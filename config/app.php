@@ -174,6 +174,15 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        
+        //
+        /*
+         * Passport Service Providers...
+         */
+        \Laravel\Passport\PassportServiceProvider::class,
+        \Fruitcake\Cors\CorsServiceProvider::class
+
 
     ],
 
@@ -227,5 +236,12 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
     ],
-
+    
+    /*
+     |
+     | Current API version
+     | should be like v1, v2 etc
+     |
+     */
+    'api_version' => env('API_VERSION', 'v1'),
 ];

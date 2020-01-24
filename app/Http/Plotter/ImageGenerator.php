@@ -118,7 +118,7 @@ class ImageGenerator
         $filePath = "public/{$userId}";
         $fullFilePath = "{$filePath}/{$fileName}";
         
-        $this->out( \Storage::url($fullFilePath), 'yellow' );
+        $this->out( \Storage::url($fullFilePath).END_LINE, 'yellow' );
         
         imagepng($this->image, "{$this->publicPath}/{$userId}/{$fileName}", -1); // public/storage/{$userId}/
         $this->cleanUp();
@@ -143,7 +143,7 @@ class ImageGenerator
             if (!empty($result)) {
                 
                 // Dataset for a day
-                $this->out(  self::END_LINE . "Day $day of $this->days :" , 'green' );
+                $this->out(  self::END_LINE . "Day {$day} of {$this->days} :" , 'green' );
                 
                 if (count($result) > 0) foreach ($result as $comment) {
                     // Set pixel

@@ -1,0 +1,40 @@
+{
+    "title": "Welcome to Builder manager",
+    "description": "<div>Blah blah blah anythin html </div> \n      <div class=\"font-weight-bold\">Please check the XHR requests of **Network** panel in chrome dev-tool for Server-side APIs.</div>\n      ",
+    "button": {
+        "icon": "icon-home",
+        "variant": "primary",
+        "text": "Somebody text for a link",
+        "to": "/"
+    },
+    "statics": [
+        {
+            "bg": "info",
+            "icon": "icon-speedometer",
+            "value": 9100,
+            "title": "Comments",
+            "progress": 78
+        },
+        {
+            "bg": "success",
+            "icon": "icon-people",
+            "value": 18457,
+            "title": "Users",
+            "progress": 60
+        },
+        {
+            "bg": "warning",
+            "icon": "icon-basket-loaded",
+            "value": 117237,
+            "title": "Sales",
+            "progress": 92
+        },
+        {
+            "bg": "primary",
+            "icon": "icon-camrecorder",
+            "value": 512,
+            "title": "Videos",
+            "progress": 67
+        }
+    ]
+}
