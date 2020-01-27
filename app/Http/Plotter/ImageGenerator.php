@@ -118,7 +118,7 @@ class ImageGenerator
         $filePath = "public/{$userId}";
         $fullFilePath = "{$filePath}/{$fileName}";
         
-        $this->out( \Storage::url($fullFilePath).END_LINE, 'yellow' );
+        $this->out( \Storage::url($fullFilePath). self::END_LINE, 'yellow' );
         
         imagepng($this->image, "{$this->publicPath}/{$userId}/{$fileName}", -1); // public/storage/{$userId}/
         $this->cleanUp();

@@ -20,17 +20,38 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 
-import App from './views/App.vue';
+import App from './App.vue';
+import router from './router';
+import store from "./store";
+// import i18n from './i18n'
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+import ApiService from './service/api.service'
+import {TokenService} from './service/token.service'
 
+import { sync } from 'vuex-router-sync'
+
+Vue.use(ApiService);
+sync(store, router);
+
+
+// ApiService.init(process.env.VUE_APP_API_URL);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+// // If token exists set header
+// if (TokenService.getToken()) {
+//     ApiService.setHeader()
+// } else {
+//     store.dispatch('auth/guest')
+// }
+
 const app = new Vue({
+    router,
+    // i18n,
+    store,
     render: h => h(App)
 }).$mount("#init");;
 

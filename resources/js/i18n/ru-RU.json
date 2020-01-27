@@ -1,0 +1,61 @@
+{
+  "actions": {
+    "create": "new",
+    "new": "new",
+    "delete": "delete",
+    "delete_all": "Delete all",
+    "reload": "refresh",
+    "search": "search",
+    "search_and_export": "Search and export",
+    "save": "save",
+    "back": "return",
+    "submit": "submit",
+    "view": "View",
+    "actions": "action",
+    "upload": "upload",
+    "change": "replace",
+    "choose": "choose",
+    "new": "new",
+    "new": "new",
+    "new": "new",
+    "new": "new",
+    "new": "new",
+    "new": "new",
+    "new": "new",
+    "new": "new",
+    "new": "new",
+    "new": "new",
+    "new": "new",
+    "new": "new",
+    "new": "new",
+    "edit": "edit"
+  },
+  "texts": {
+
+  },
+  "fields": {
+    "username": "username",
+    "password": "password"
+  },
+  "messages": {
+    "paginate": "total {total} data",
+    "login_please": "Please log in first",
+    "login_footer": "REST ADMIN - Awesome Admin Dashboard for RESTFul API",
+    "login_description": "Manage the background",
+    "login": "Авторизация",
+    "logout": "Выйти",
+    "dashboard": "Главная",
+    "go_home": "Back to the home page",
+    "succeed": "Operation succeeded",
+    "uploaded": "Uploaded successfully",
+    "deleted": "delete successfully",
+    "deleted_all": "All deleted successfully",
+    "confirm_delete": "Are you sure you want to delete?",
+    "image_size": "Size requirement: {width}x{height}",
+    "confirm_delete_all": "This operation cannot be resumed. Are you sure you want to delete it all?"
+  },
+  "errors": {
+    "too_large": "Please upload a file smaller than {limit}KB",
+    "wrong_size": "Please upload a picture of {width}x{height} pixels"
+  }
+}

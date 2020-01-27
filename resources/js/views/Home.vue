@@ -4,10 +4,7 @@
 
 <script>
 export default {
-name: "Home",
-mounted() {
-console.log(111111111111);
-}
+name: "Home"
 }
 </script>
 

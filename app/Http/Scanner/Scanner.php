@@ -90,7 +90,7 @@ class Scanner extends AbstractScanner
     
         $this->comment->handle($insert);
     
-        $this->out( "+" . self::END_LINE  );
+        $this->out( "+" . self::END_LINE , 'green' );
     }
     
     protected function saveUser(): void
