@@ -1,3 +1,5 @@
+import Vue from 'vue';
+
 export default [
   {
     path: '*',
@@ -15,7 +17,6 @@ export default [
     },
     name: 'NotFound',
     component: () => import(
-
       `../views/system/NotFound.vue`
     )
   },
@@ -36,7 +37,6 @@ export default [
     },
     name: 'ServerError',
     component: () => import(
-
       `../views/system/Error.vue`
     )
   },
@@ -46,20 +46,18 @@ export default [
     redirect: {
       path: '/home'
     },
-    component: () => import(
-      `../views/layout/Layout.vue`
-    ),
+    component:() => import(
+        `../views/layout/Layout.vue`
+        ),
       children: [
         {
           path: '/dashboard',
           meta: {
             breadcrumb: true,
-            public: false,
-            onlyGuest: false
+            public: true
           },
           name: 'Dashboard',
           component: () => import(
-
             `../views/Home.vue`
             )
         },
@@ -72,7 +70,6 @@ export default [
           },
           name: 'Login',
           component: () => import(
-
             `../views/Login.vue`
             )
         },
