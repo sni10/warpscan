@@ -1,16 +1,23 @@
 <template>
-    <page-header class="page-header">
-        <template></template>
-    </page-header>
+    <div>
+        <div>
+            <page-header class="page--header"></page-header>
+        </div>
+        <div>
+            <app-toolbar class="app--toolbar"></app-toolbar>
+        </div>
+    </div>
 </template>
 <script>
 import menu from '../api/menu';
 import PageHeader from "../components/PageHeader";
+import AppToolbar from '../components/AppToolbar';
 import { mapState } from "vuex" // , mapGetters, mapActions
 export default {
   name: 'app-drawer',
   components: {
-      PageHeader
+      PageHeader,
+      AppToolbar,
   },
   props: {
     expanded: {
