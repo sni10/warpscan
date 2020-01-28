@@ -1,29 +1,43 @@
 <template>
-    <router-view></router-view>
+    <v-app id="inspire"class="app" >
+            <app-drawer class="app--drawer"></app-drawer>
+            <main class="py-4">
+                <transition>
+                    <keep-alive>
+                        <router-view :key="$route.fullpath"></router-view>
+                    </keep-alive>
+                </transition>
+            </main>
+    </v-app>
 </template>
-
 <script>
 
-  export default {
-    components: {
-    },
-    data: () => ({}),
-    computed: {
-    },
-    created () {
-    },
-    methods: {
-    },
-  };
+import AppDrawer from '../../components/AppDrawer';
+
+export default {
+components: {
+    AppDrawer
+},
+data: () => ({
+    expanded: true,
+    rightDrawer: false,
+    snackbar: {
+        show: false,
+        text: '',
+        color: '',
+    }
+}),
+
+computed: {
+
+},
+
+created () {
+
+},
+methods: {
+
+},
+
+};
 </script>
-
-
-<!--<style lang="stylus" scoped>-->
-<!--  .setting-fab-->
-<!--    top:50%!important;-->
-<!--    right:0;-->
-<!--    border-radius:0-->
-<!--  .page-wrapper-->
-<!--    min-height:calc(100vh - 64px - 50px - 81px );
-
-</style>-->

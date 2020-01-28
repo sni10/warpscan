@@ -13,7 +13,17 @@
                                 <label for="email" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
 
                                 <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="" required autocomplete="email" autofocus>
+                                    <v-text-field
+                                        class="form-control"
+                                        append-icon="person"
+                                        v-model="email"
+                                        :error-messages="emailErrors"
+                                        label="E-mail"
+                                        type="text"
+                                        required
+                                        @input="$v.email.$touch()"
+                                        @blur="$v.email.$touch()"
+                                    ></v-text-field>
                                 </div>
                             </div>
 
@@ -21,7 +31,18 @@
                                 <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
 
                                 <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control @error('password') is-invalid enderror" name="password" required autocomplete="current-password">
+                                    <v-text-field
+                                        class="form-control"
+                                        append-icon="lock"
+                                        v-model="password"
+                                        :error-messages="passErrors"
+                                        :counter="10"
+                                        label="Password"
+                                        type="password"
+                                        required
+                                        @input="$v.password.$touch()"
+                                        @blur="$v.password.$touch()"
+                                    ></v-text-field>
                                 </div>
                             </div>
 

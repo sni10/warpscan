@@ -1,3 +1,5 @@
+// import Vue from "vue/types/vue";
+
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -26,15 +28,15 @@ import store from "./store";
 // import i18n from './i18n'
 
 import ApiService from './service/api.service'
-import {TokenService} from './service/token.service'
 
 import { sync } from 'vuex-router-sync'
 
 Vue.use(ApiService);
+
 sync(store, router);
 
+import vuetify from './render/vuetify'
 
-// ApiService.init(process.env.VUE_APP_API_URL);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -49,6 +51,7 @@ sync(store, router);
 // }
 
 const app = new Vue({
+    vuetify,
     router,
     // i18n,
     store,
