@@ -3,7 +3,7 @@ const REFRESH_TOKEN_KEY = 'refresh_token';
 const DATA_USER = 'user';
 
 const TOKEN_TYPE = 'token_type';
-const APP_PREFIX = 'bms_app_';
+const APP_PREFIX = 'warpscan_app_';
 
 /**
  * Manage the how Access Tokens are being stored and retreived from storage.
@@ -57,6 +57,7 @@ const TokenService = {
   },
 
   saveUser(user) {
+      console.log(user);
     localStorage.setItem(APP_PREFIX + DATA_USER, JSON.stringify(user))
   },
 

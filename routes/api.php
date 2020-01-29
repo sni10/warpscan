@@ -13,26 +13,18 @@ use Illuminate\Http\Request;
 */
 # Note: we use invokable controllers
 
-// Route::get('forbidden', 'Auth\ForbiddenController');
+Route::get('forbidden', 'Auth\ForbiddenController');
 
 Route::group([
     'prefix' => 'v1',
-//    'middleware' => 'client_credentials'
-
+    'middleware' => 'auth:api' // проверка аутентификации на мидлварах
 ], function () {
     
-    Route::get('site', 'FakeController@site');
-    
     Route::group([
-        'middleware' => 'auth:api' // проверка аутентификации на мидлварах
+        'middleware' => 'client_credentials'
     ], function() {
     
-        Route::get('targets', 'Target\GetTargetController');
-        
-        Route::group([ 'prefix' => 'target' ],
-            function(){
-                Route::get('list', 'Target\GetTargetController');
-            });
+        Route::get('user', 'FakeController@user');
         
     });
 });

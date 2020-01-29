@@ -82,6 +82,14 @@ name: "PageHeader",
     props: {
         source: String,
     },
+    methods: {
+        handleDrawerToggle () {
+            window.getApp.$emit('APP_DRAWER_TOGGLED');
+        },
+        handleFullScreen () {
+            Util.toggleFullScreen();
+        }
+    },
     data: () => ({
         dialog: false,
         drawer: null,

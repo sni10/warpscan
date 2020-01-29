@@ -28,11 +28,11 @@ const UserService = {
 
     const requestData = {
       method: 'post',
-      url: process.env.VUE_APP_API_ROOT + "oauth/token/",
+      url: process.env.MIX_VUE_APP_API_ROOT + "oauth/token/",
       data: {
         grant_type: 'password',
-        client_id: process.env.VUE_APP_CLIENT_ID_PASSWORD,
-        client_secret: process.env.VUE_APP_CLIENT_SECRET_PASSWORD,
+        client_id: process.env.MIX_VUE_APP_CLIENT_ID_PASSWORD,
+        client_secret: process.env.MIX_VUE_APP_CLIENT_SECRET_PASSWORD,
         username: username,
         password: password
       },
@@ -61,11 +61,11 @@ const UserService = {
   guest: async function() {
     const requestData = {
       method: 'post',
-      url: process.env.VUE_APP_API_ROOT + "oauth/token/",
+      url: process.env.MIX_VUE_APP_API_ROOT + "oauth/token/",
       data: {
         grant_type: 'client_credentials',
-        client_id: process.env.VUE_APP_CLIENT_ID_CREDENTIAL,
-        client_secret: process.env.VUE_APP_CLIENT_SECRET_CREDENTIAL,
+        client_id: process.env.MIX_VUE_APP_CLIENT_ID_CREDENTIAL,
+        client_secret: process.env.MIX_VUE_APP_CLIENT_SECRET_CREDENTIAL,
         scope: ''
       }
     };
@@ -80,9 +80,7 @@ const UserService = {
       return response.data.access_token
 
     } catch (error) {
-
       console.log( error );
-
       throw new AuthenticationError(error.response.status, error.response.data.detail)
     }
   },
@@ -125,7 +123,11 @@ const UserService = {
   fetchUser: async function() {
     ApiService.setHeader();
       try {
-        const response = await ApiService.get('user');
+        const response = await ApiService.get( process.env.MIX_VUE_APP_API_URL + 'user');
+
+        console.log( response );
+        console.log( response.data.data );
+
         let userData = response.data.data;
         TokenService.saveUser( userData );
         return userData

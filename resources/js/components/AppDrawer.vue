@@ -19,12 +19,6 @@ export default {
       PageHeader,
       AppToolbar,
   },
-  props: {
-    expanded: {
-      type: Boolean,
-      default: true
-    },
-  },
   data: () => ({
     mini: false,
     drawer: true,
@@ -35,6 +29,7 @@ export default {
   }),
   computed: {
     ...mapState(["site"]),
+
     computeGroupActive () {
       return true;
     },
@@ -47,12 +42,10 @@ export default {
     }
   },
   created () {
-    // window.getApp.$on('APP_DRAWER_TOGGLED', () => {
-    //   this.drawer = (!this.drawer);
-    // });
+    window.getApp.$on('APP_DRAWER_TOGGLED', () => {
+      this.drawer = (!this.drawer);
+    });
   },
-
-
   methods: {
     genChildTarget (item, subItem) {
       if (subItem.href) return;

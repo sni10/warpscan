@@ -31,12 +31,12 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
 	    Passport::routes();
+	    
+	    Passport::enableImplicitGrant();
 
 	    Passport::tokensExpireIn(now()->addDays(5));
 
 	    Passport::refreshTokensExpireIn(now()->addDays(30));
-    
-        Passport::personalAccessClientId('client-id');
-	    
+	   
     }
 }

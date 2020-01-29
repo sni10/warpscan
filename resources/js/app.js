@@ -28,6 +28,7 @@ import store from "./store";
 // import i18n from './i18n'
 
 import ApiService from './service/api.service'
+import { TokenService } from './service/token.service'
 
 import { sync } from 'vuex-router-sync'
 
@@ -44,11 +45,11 @@ import vuetify from './render/vuetify'
  */
 
 // // If token exists set header
-// if (TokenService.getToken()) {
-//     ApiService.setHeader()
-// } else {
-//     store.dispatch('auth/guest')
-// }
+if (TokenService.getToken()) {
+    ApiService.setHeader()
+} else {
+    store.dispatch('auth/guest')
+}
 
 const app = new Vue({
     vuetify,

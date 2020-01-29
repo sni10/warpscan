@@ -98082,9 +98082,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./router */ "./resources/js/router/index.js");
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
 /* harmony import */ var _service_api_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./service/api.service */ "./resources/js/service/api.service.js");
-/* harmony import */ var vuex_router_sync__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuex-router-sync */ "./node_modules/vuex-router-sync/index.js");
-/* harmony import */ var vuex_router_sync__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(vuex_router_sync__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _render_vuetify__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./render/vuetify */ "./resources/js/render/vuetify.js");
+/* harmony import */ var _service_token_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./service/token.service */ "./resources/js/service/token.service.js");
+/* harmony import */ var vuex_router_sync__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuex-router-sync */ "./node_modules/vuex-router-sync/index.js");
+/* harmony import */ var vuex_router_sync__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(vuex_router_sync__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _render_vuetify__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./render/vuetify */ "./resources/js/render/vuetify.js");
 // import Vue from "vue/types/vue";
 
 /**
@@ -98111,8 +98112,9 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 
 
+
 Vue.use(_service_api_service__WEBPACK_IMPORTED_MODULE_3__["default"]);
-Object(vuex_router_sync__WEBPACK_IMPORTED_MODULE_4__["sync"])(_store__WEBPACK_IMPORTED_MODULE_2__["default"], _router__WEBPACK_IMPORTED_MODULE_1__["default"]);
+Object(vuex_router_sync__WEBPACK_IMPORTED_MODULE_5__["sync"])(_store__WEBPACK_IMPORTED_MODULE_2__["default"], _router__WEBPACK_IMPORTED_MODULE_1__["default"]);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -98120,14 +98122,15 @@ Object(vuex_router_sync__WEBPACK_IMPORTED_MODULE_4__["sync"])(_store__WEBPACK_IM
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 // // If token exists set header
-// if (TokenService.getToken()) {
-//     ApiService.setHeader()
-// } else {
-//     store.dispatch('auth/guest')
-// }
+
+if (_service_token_service__WEBPACK_IMPORTED_MODULE_4__["TokenService"].getToken()) {
+  _service_api_service__WEBPACK_IMPORTED_MODULE_3__["default"].setHeader();
+} else {
+  _store__WEBPACK_IMPORTED_MODULE_2__["default"].dispatch('auth/guest');
+}
 
 var app = new Vue({
-  vuetify: _render_vuetify__WEBPACK_IMPORTED_MODULE_5__["default"],
+  vuetify: _render_vuetify__WEBPACK_IMPORTED_MODULE_6__["default"],
   router: _router__WEBPACK_IMPORTED_MODULE_1__["default"],
   // i18n,
   store: _store__WEBPACK_IMPORTED_MODULE_2__["default"],
@@ -98507,6 +98510,15 @@ __webpack_require__.r(__webpack_exports__);
     return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ../views/system/Error.vue */ "./resources/js/views/system/Error.vue"));
   }
 }, {
+  path: '/login',
+  meta: {
+    "public": true
+  },
+  name: 'Login',
+  component: function component() {
+    return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(2)]).then(__webpack_require__.bind(null, /*! ../views/Login.vue */ "./resources/js/views/Login.vue"));
+  }
+}, {
   path: '/',
   redirect: {
     path: '/home'
@@ -98523,15 +98535,6 @@ __webpack_require__.r(__webpack_exports__);
     name: 'Dashboard',
     component: function component() {
       return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! ../views/Home.vue */ "./resources/js/views/Home.vue"));
-    }
-  }, {
-    path: '/login',
-    meta: {
-      "public": true
-    },
-    name: 'Login',
-    component: function component() {
-      return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(2)]).then(__webpack_require__.bind(null, /*! ../views/Login.vue */ "./resources/js/views/Login.vue"));
     }
   }]
 }]);
@@ -98822,7 +98825,7 @@ var TOKEN_KEY = 'access_token';
 var REFRESH_TOKEN_KEY = 'refresh_token';
 var DATA_USER = 'user';
 var TOKEN_TYPE = 'token_type';
-var APP_PREFIX = 'bms_app_';
+var APP_PREFIX = 'warpscan_app_';
 /**
  * Manage the how Access Tokens are being stored and retreived from storage.
  *
@@ -98865,6 +98868,7 @@ var TokenService = {
     return JSON.parse(localStorage.getItem(APP_PREFIX + DATA_USER));
   },
   saveUser: function saveUser(user) {
+    console.log(user);
     localStorage.setItem(APP_PREFIX + DATA_USER, JSON.stringify(user));
   },
   removeUser: function removeUser() {
@@ -98979,11 +98983,11 @@ var UserService = _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["ma
           case 0:
             requestData = {
               method: 'post',
-              url: process.env.VUE_APP_API_ROOT + "oauth/token/",
+              url: "http://127.0.0.1:8000/" + "oauth/token/",
               data: {
                 grant_type: 'password',
-                client_id: process.env.VUE_APP_CLIENT_ID_PASSWORD,
-                client_secret: process.env.VUE_APP_CLIENT_SECRET_PASSWORD,
+                client_id: "10",
+                client_secret: "dVog6Do8GZRId5IcGM4q0Uwhy6nSq7oRL6D1eFqd",
                 username: username,
                 password: password
               }
@@ -99026,11 +99030,11 @@ var UserService = _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["ma
           case 0:
             requestData = {
               method: 'post',
-              url: process.env.VUE_APP_API_ROOT + "oauth/token/",
+              url: "http://127.0.0.1:8000/" + "oauth/token/",
               data: {
                 grant_type: 'client_credentials',
-                client_id: process.env.VUE_APP_CLIENT_ID_CREDENTIAL,
-                client_secret: process.env.VUE_APP_CLIENT_SECRET_CREDENTIAL,
+                client_id: "9",
+                client_secret: "FlHcxvLo1GcgURfw0xVW93ZFaorFDmM4sObfRdSJ",
                 scope: ''
               }
             };
@@ -99116,28 +99120,30 @@ var UserService = _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["ma
             _api_service__WEBPACK_IMPORTED_MODULE_1__["default"].setHeader();
             _context4.prev = 1;
             _context4.next = 4;
-            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_api_service__WEBPACK_IMPORTED_MODULE_1__["default"].get('user'));
+            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_api_service__WEBPACK_IMPORTED_MODULE_1__["default"].get("http://127.0.0.1:8000/api/v1/" + 'user'));
 
           case 4:
             response = _context4.sent;
+            console.log(response);
+            console.log(response.data.data);
             userData = response.data.data;
             _token_service__WEBPACK_IMPORTED_MODULE_2__["TokenService"].saveUser(userData);
             return _context4.abrupt("return", userData);
 
-          case 10:
-            _context4.prev = 10;
+          case 12:
+            _context4.prev = 12;
             _context4.t0 = _context4["catch"](1);
             throw new AuthenticationError(_context4.t0.response.status, _context4.t0.response.data.detail);
 
-          case 13:
+          case 15:
             return _context4.abrupt("return", false);
 
-          case 14:
+          case 16:
           case "end":
             return _context4.stop();
         }
       }
-    }, null, null, [[1, 10]]);
+    }, null, null, [[1, 12]]);
   },
 
   /**
